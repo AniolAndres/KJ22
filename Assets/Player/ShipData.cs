@@ -11,7 +11,7 @@ public class ShipData {
 
     public float damage;
 
-    public float shootingSpeed;
+    public float timeBetweenShots;
 
     public float bulletLifeTime;
 

@@ -19,16 +19,11 @@ public class PlayerScript : MonoBehaviour
 
     private readonly List<AlliedShipScript> alliedShips = new List<AlliedShipScript>(100);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    public void SpawnShip(ShipData shipData) {
+    public void SpawnShip(ShipData shipData, BulletPool bulletPool) {
         var shipView = Instantiate(shipData.alliedShipPrefab, swarmParent);
         var curve = curveFactory.GetRandomCurve();
-        shipView.Setup(shipData, curve, this);
+        shipView.Setup(shipData, curve, this, bulletPool);
         alliedShips.Add(shipView);
     }
 

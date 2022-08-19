@@ -24,6 +24,9 @@ public class GameStateView : MonoBehaviour
     [SerializeField]
     private float levelScrollSpeed;
 
+    [SerializeField]
+    private BulletPool bulletPool;
+
     private LevelController currentLevel;
 
     private int currentLevelIndex;
@@ -49,7 +52,7 @@ public class GameStateView : MonoBehaviour
     }
 
     private void SpawnShipButton(ShipData shipData) {
-        playerShip.SpawnShip(shipData);
+        playerShip.SpawnShip(shipData, bulletPool);
     }
 
 #if UNITY_EDITOR
