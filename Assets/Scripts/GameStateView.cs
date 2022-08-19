@@ -1,6 +1,8 @@
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameStateView : MonoBehaviour
 {
@@ -10,9 +12,31 @@ public class GameStateView : MonoBehaviour
     [SerializeField]
     private Transform levelParent;
 
+    [SerializeField]
+    private Transform playerParent;
+
+    [SerializeField]
+    private Transform swarmParent;
+
+    [SerializeField]
+    private PlayerScript playerPrefab;
+
+    [SerializeField]
+    private GameUiView gameView;
+
     private LevelController currentLevel;
 
     private int currentLevelIndex;
+
+    private List<AlliedShipScript> alliedShips = new List<AlliedShipScript>(100);
+
+    private void OnEnable() {
+        gameView.OnShipButtonPressed += SpawnShipButton;
+    }
+
+    private void OnDisable() {
+        gameView.OnShipButtonPressed -= SpawnShipButton;
+    }
 
     public void StartFirstLevel() {
         var first = levelProvider.GetLevel(currentLevelIndex);
@@ -20,6 +44,12 @@ public class GameStateView : MonoBehaviour
         currentLevel.OnLevelFailed += OnLevelFail;
         currentLevel.OnLevelComplete += OnLevelComplete;
         currentLevel.OnStart();
+    }
+
+    private void SpawnShipButton(ShipData shipData) {
+        var shipView = Instantiate(shipData.alliedShipPrefab, swarmParent);
+        shipView.Setup(shipData);
+        alliedShips.Add(shipView);
     }
 
 #if UNITY_EDITOR
