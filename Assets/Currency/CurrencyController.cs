@@ -1,9 +1,12 @@
 
 using System;
+using TMPro;
 using UnityEngine;
 
 public class CurrencyController : MonoBehaviour
 {
+    [SerializeField]
+    private TextMeshProUGUI currencyText;
 
     public event Action<int> OnCurrencyReceived; //Just received, not total balance
 

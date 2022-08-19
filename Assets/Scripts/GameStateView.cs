@@ -24,11 +24,16 @@ public class GameStateView : MonoBehaviour
     [SerializeField]
     private GameUiView gameView;
 
+    [SerializeField]
+    private float levelScrollSpeed;
+
     private LevelController currentLevel;
 
     private int currentLevelIndex;
 
     private List<AlliedShipScript> alliedShips = new List<AlliedShipScript>(100);
+
+    private PlayerScript playerShip;
 
     private void OnEnable() {
         gameView.OnShipButtonPressed += SpawnShipButton;
@@ -44,6 +49,8 @@ public class GameStateView : MonoBehaviour
         currentLevel.OnLevelFailed += OnLevelFail;
         currentLevel.OnLevelComplete += OnLevelComplete;
         currentLevel.OnStart();
+        currentLevel.SetScrollSpeed(levelScrollSpeed);
+        playerShip = Instantiate(playerPrefab, playerParent);
     }
 
     private void SpawnShipButton(ShipData shipData) {
@@ -76,6 +83,8 @@ public class GameStateView : MonoBehaviour
         var next = levelProvider.GetLevel(++currentLevelIndex);
         currentLevel = Instantiate(next, levelParent);
         currentLevel.OnStart();
+
+        currentLevel.SetScrollSpeed(levelScrollSpeed);
 
         currentLevel.OnLevelFailed += OnLevelFail;
         currentLevel.OnLevelComplete += OnLevelComplete;

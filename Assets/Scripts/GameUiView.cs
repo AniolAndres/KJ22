@@ -16,6 +16,12 @@ public class GameUiView : MonoBehaviour
     [SerializeField]
     private AlliedShipProvider shipProvider;
 
+    [SerializeField]
+    private CurrencyController currencyController;
+
+    [SerializeField]
+    private HealthController healthController;
+
     public event Action<ShipData> OnShipButtonPressed;
 
     private void OnEnable() {
