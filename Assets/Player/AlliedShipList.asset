@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipData:
   - cost: 1
-    speed: 3
+    speed: 1
     damage: 1
     shootingSpeed: 3
     bulletLifeTime: 2
     bulletSpeed: 3
     alliedShipPrefab: {fileID: 5036377363204467891, guid: 28dcfbee1c07bdc45b5044a414d5cf25, type: 3}
   - cost: 2
-    speed: 2
+    speed: 1
     damage: 2
     shootingSpeed: 2
     bulletLifeTime: 3

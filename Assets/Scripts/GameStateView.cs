@@ -16,9 +16,6 @@ public class GameStateView : MonoBehaviour
     private Transform playerParent;
 
     [SerializeField]
-    private Transform swarmParent;
-
-    [SerializeField]
     private PlayerScript playerPrefab;
 
     [SerializeField]
@@ -30,8 +27,6 @@ public class GameStateView : MonoBehaviour
     private LevelController currentLevel;
 
     private int currentLevelIndex;
-
-    private List<AlliedShipScript> alliedShips = new List<AlliedShipScript>(100);
 
     private PlayerScript playerShip;
 
@@ -54,9 +49,7 @@ public class GameStateView : MonoBehaviour
     }
 
     private void SpawnShipButton(ShipData shipData) {
-        var shipView = Instantiate(shipData.alliedShipPrefab, swarmParent);
-        shipView.Setup(shipData);
-        alliedShips.Add(shipView);
+        playerShip.SpawnShip(shipData);
     }
 
 #if UNITY_EDITOR

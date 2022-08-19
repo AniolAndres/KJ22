@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -9,12 +10,26 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float edgeMargin;
 
+    [SerializeField]
+    private Transform swarmParent;
+
     private RectTransform rectTransform => transform as RectTransform;
+
+    private readonly CurveFactory curveFactory = new CurveFactory();
+
+    private readonly List<AlliedShipScript> alliedShips = new List<AlliedShipScript>(100);
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public void SpawnShip(ShipData shipData) {
+        var shipView = Instantiate(shipData.alliedShipPrefab, swarmParent);
+        var curve = curveFactory.GetRandomCurve();
+        shipView.Setup(shipData, curve, this);
+        alliedShips.Add(shipView);
     }
 
     // Update is called once per frame
