@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EnemyShipScript : MonoBehaviour {
 
@@ -42,6 +43,7 @@ public class EnemyShipScript : MonoBehaviour {
     public void Setup(BulletPool pool) {
         this.bulletPool = pool;
         currentHp = hp;
+        timer = Random.Range(0f, timeBetweenShots * 0.66f);
     }
 
     public void TakeDamage(int damage) {
@@ -78,8 +80,8 @@ public class EnemyShipScript : MonoBehaviour {
 
             yield return null;
         }
-        shipImage.color = Color.black;
 
+        shipImage.color = Color.black;
     }
 
     private void DestroyShip() {

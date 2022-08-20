@@ -842,7 +842,7 @@ GameObject:
   - component: {fileID: 4631668055887605986}
   - component: {fileID: 6642514706832547348}
   m_Layer: 0
-  m_Name: FirstShipButton
+  m_Name: GenericBuyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

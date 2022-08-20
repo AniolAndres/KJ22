@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 
 public class AlliedShipScript : MonoBehaviour {
 
@@ -23,7 +23,7 @@ public class AlliedShipScript : MonoBehaviour {
         this.player = player;
         this.bulletPool = bulletPool;
         this.shipData = shipData;
-        timer = 0f;
+        timer = Random.Range(0f, shipData.timeBetweenShots);
     }
 
     private void Update() {

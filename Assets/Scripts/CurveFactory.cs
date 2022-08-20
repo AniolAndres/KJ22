@@ -9,11 +9,11 @@ public class CurveFactory {
         var random = Random.Range(0, 3);
         switch (random) {
             case 0:
-                return new RoseCurve(150,5);
+                return new RoseCurve(250,5);
             case 1:
-                return new RoseCurve(150,7);
+                return new RoseCurve(250,7);
             case 2:
-                return new RoseCurve(150,3);
+                return new RoseCurve(250,3);
             default:
                 throw new ArgumentOutOfRangeException();
         }
