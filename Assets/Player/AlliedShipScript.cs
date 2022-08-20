@@ -23,6 +23,7 @@ public class AlliedShipScript : MonoBehaviour {
         this.player = player;
         this.bulletPool = bulletPool;
         this.shipData = shipData;
+        timer = 0f;
     }
 
     private void Update() {
@@ -41,7 +42,8 @@ public class AlliedShipScript : MonoBehaviour {
             smallBullet.SetUp(transform.position, new BulletData {
                 bulletLifeTime = shipData.bulletLifeTime,
                 bulletSpeed = shipData.bulletSpeed,
-                isFriendly = true
+                isFriendly = true,
+                damage = shipData.damage
             });
         }
     }

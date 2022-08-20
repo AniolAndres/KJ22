@@ -8,9 +8,18 @@ public class CurrencyController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI currencyText;
 
-    public event Action<int> OnCurrencyReceived; //Just received, not total balance
+    [SerializeField]
+    private EnemyActivationTrigger enemyActivationTrigger;
 
     private int totalCurrency;
+
+    private void OnEnable() {
+        enemyActivationTrigger.OnCurrencyReceived += AddCurrency;
+    }
+
+    private void OnDisable() {
+        enemyActivationTrigger.OnCurrencyReceived -= AddCurrency;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +33,7 @@ public class CurrencyController : MonoBehaviour
 
     public void AddCurrency(int sum) {
         totalCurrency += sum;
-        OnCurrencyReceived?.Invoke(sum);
+        UpdateCurrencyText();
     }
 
     public void SpendCurrency(int cost) {
@@ -32,5 +41,10 @@ public class CurrencyController : MonoBehaviour
         if(totalCurrency < 0) {
             throw new NotSupportedException("Can't have currency negative!");
         }
+        UpdateCurrencyText();
+    }
+
+    private void UpdateCurrencyText() {
+        currencyText.text = totalCurrency.ToString();
     }
 }

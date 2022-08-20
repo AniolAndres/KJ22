@@ -19,6 +19,12 @@ public class PlayerScript : MonoBehaviour
 
     private readonly List<AlliedShipScript> alliedShips = new List<AlliedShipScript>(100);
 
+    private Vector2 parentSize;
+
+    private void Start() {
+        var parentRectTransform = transform.parent.transform as RectTransform;
+        parentSize = parentRectTransform.rect.size;
+    }
 
     public void SpawnShip(ShipData shipData, BulletPool bulletPool) {
         var shipView = Instantiate(shipData.alliedShipPrefab, swarmParent);
@@ -48,17 +54,17 @@ public class PlayerScript : MonoBehaviour
         }
         var newPosition = rectTransform.anchoredPosition + speed * velocity * Time.smoothDeltaTime;
 
-        if(newPosition.y > Screen.height / 2f - edgeMargin) {
-            newPosition.y = Screen.height / 2f - edgeMargin;
+        if(newPosition.y > parentSize.y / 2f - edgeMargin) {
+            newPosition.y = parentSize.y / 2f - edgeMargin;
         }
-        else if (newPosition.y < - Screen.height / 2f + edgeMargin) {
-            newPosition.y = - Screen.height / 2f + edgeMargin;
+        else if (newPosition.y < -parentSize.y / 2f + edgeMargin) {
+            newPosition.y = -parentSize.y / 2f + edgeMargin;
         }
 
-        if (newPosition.x > Screen.width / 2f - edgeMargin) {
-            newPosition.x = Screen.width / 2f - edgeMargin;
-        } else if (newPosition.x < -Screen.width / 2f + edgeMargin) {
-            newPosition.x = -Screen.width / 2f + edgeMargin;
+        if (newPosition.x > parentSize.x / 2f - edgeMargin) {
+            newPosition.x = parentSize.x / 2f - edgeMargin;
+        } else if (newPosition.x < -parentSize.x / 2f + edgeMargin) {
+            newPosition.x = -parentSize.x / 2f + edgeMargin;
         }
 
         rectTransform.anchoredPosition = newPosition;

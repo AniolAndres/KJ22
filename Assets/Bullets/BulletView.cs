@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BulletView : MonoBehaviour
 {
-
     public event Action<BulletView> OnDestroyed;
 
     private BulletData bulletData;
@@ -23,9 +22,27 @@ public class BulletView : MonoBehaviour
         transform.position += direction * bulletData.bulletSpeed * Time.smoothDeltaTime;
 
         timer += Time.smoothDeltaTime;
+
         if(timer > bulletData.bulletLifeTime) {
             OnDestroyed?.Invoke(this);
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision) {
+
+
+
+        var enemyScript = collision.gameObject.GetComponent<EnemyShipScript>();
+        if(enemyScript != null && !enemyScript.IsDead && bulletData.isFriendly && enemyScript is IEnemy enemy) {
+            enemy.TakeDamage(bulletData.damage);
+            SpawnHitParticles();
+            OnDestroyed?.Invoke(this);
+        }
+
+        
+    }
+
+    private void SpawnHitParticles() {
+        
+    }
 }
