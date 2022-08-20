@@ -17,5 +17,7 @@ public class ShipData {
 
     public float bulletSpeed;
 
+    public BulletType bulletType;
+
     public AlliedShipScript alliedShipPrefab;
 }

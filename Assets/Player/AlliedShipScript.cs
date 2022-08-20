@@ -38,7 +38,7 @@ public class AlliedShipScript : MonoBehaviour {
 
         if(timer > shipData.timeBetweenShots) {
             timer -= shipData.timeBetweenShots;
-            var smallBullet = bulletPool.GetSmallBullet();
+            var smallBullet = bulletPool.GetBulletView(shipData.bulletType);
             smallBullet.SetUp(transform.position, new BulletData {
                 bulletLifeTime = shipData.bulletLifeTime,
                 bulletSpeed = shipData.bulletSpeed,

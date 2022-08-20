@@ -22,7 +22,10 @@ public class EnemyShipScript : MonoBehaviour {
     private float bulletLifeTime;
 
     [SerializeField]
-    private Image shipImage; 
+    private Image shipImage;
+
+    [SerializeField]
+    private BulletType bulletType;
 
     private BulletPool bulletPool;
 
@@ -103,7 +106,7 @@ public class EnemyShipScript : MonoBehaviour {
     }
 
     private void Shoot() {
-        var smallBullet = bulletPool.GetSmallBullet();
+        var smallBullet = bulletPool.GetBulletView(bulletType);
         smallBullet.SetUp(transform.position, new BulletData {
             bulletLifeTime = this.bulletLifeTime,
             bulletSpeed = this.bulletSpeed,

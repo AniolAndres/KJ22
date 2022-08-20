@@ -57,7 +57,7 @@ public class BossBehaviour : MonoBehaviour
 
     private void Shoot() {
         foreach (var weaponTransform in bossWeapon) {
-            var bigBullet = bulletPool.GetBigBullet();
+            var bigBullet = bulletPool.GetBulletView(BulletType.round);
             bigBullet.SetUp(weaponTransform.position, new BulletData {
                 bulletLifeTime = bulletLifeTime,
                 bulletSpeed = bulletSpeed,
