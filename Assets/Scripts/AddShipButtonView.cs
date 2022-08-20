@@ -19,6 +19,9 @@ public class AddShipButtonView : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI costText;
 
+    [SerializeField]
+    private PlayableDirector pulseDirector;
+
     public event Action OnButtonClicked;
 
     public void Setup(ShipData shipData) {
@@ -32,6 +35,12 @@ public class AddShipButtonView : MonoBehaviour {
     }
 
     private void OnClick() {
+
+        pulseDirector.Stop();
+        pulseDirector.time = 0;
+        pulseDirector.Evaluate();
+        pulseDirector.Play();
+
         OnButtonClicked?.Invoke();
     }
 

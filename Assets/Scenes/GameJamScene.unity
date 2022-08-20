@@ -139,6 +139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4470074fb999ec7429754e41bb6b0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &98147490 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5621427885063241162, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+  m_PrefabInstance: {fileID: 1871888410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &122362269
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +841,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1956349636, guid: 7e106cbe63f28394e8e3302a6d379dd0, type: 3}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b5136473ea17424aa1a2bf3014a2ed2, type: 2}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_SceneBindings.Array.data[0].key
+      value: 
+      objectReference: {fileID: 4153529009395044419, guid: 1b5136473ea17424aa1a2bf3014a2ed2, type: 2}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].key
+      value: 
+      objectReference: {fileID: 4153529009395044419, guid: 1b5136473ea17424aa1a2bf3014a2ed2, type: 2}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_SceneBindings.Array.data[0].value
+      value: 
+      objectReference: {fileID: 1086424554}
     - target: {fileID: 4631668055887605986, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
       propertyPath: m_Transition
       value: 0
@@ -1492,6 +1517,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1086424554 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5621427885063241162, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+  m_PrefabInstance: {fileID: 654121495}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1148932793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3122,6 +3152,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1691637420, guid: 7e106cbe63f28394e8e3302a6d379dd0, type: 3}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a0fd52fbdfaebf84baf1ffe64f18c110, type: 2}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_SceneBindings.Array.data[0].key
+      value: 
+      objectReference: {fileID: 4153529009395044419, guid: a0fd52fbdfaebf84baf1ffe64f18c110, type: 2}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].key
+      value: 
+      objectReference: {fileID: 4153529009395044419, guid: a0fd52fbdfaebf84baf1ffe64f18c110, type: 2}
+    - target: {fileID: 469970582579942997, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
+      propertyPath: m_SceneBindings.Array.data[0].value
+      value: 
+      objectReference: {fileID: 98147490}
     - target: {fileID: 578571684375291556, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 122
@@ -3662,7 +3712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4631668055887605987, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -22
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4631668055887605987, guid: 510841c3ce6ad2244b5c9e1122d2033f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: AlliedShipList
   m_EditorClassIdentifier: 
   shipData:
-  - cost: 1
+  - cost: 3
     speed: 1
-    damage: 1
+    damage: 6
     timeBetweenShots: 2
     bulletLifeTime: 4
     bulletSpeed: 300
@@ -32,5 +32,5 @@ MonoBehaviour:
     damage: 3
     timeBetweenShots: 2
     bulletLifeTime: 5
-    bulletSpeed: 300
+    bulletSpeed: 900
     alliedShipPrefab: {fileID: 5036377363204467891, guid: 28dcfbee1c07bdc45b5044a414d5cf25, type: 3}
