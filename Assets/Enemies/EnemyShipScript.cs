@@ -44,7 +44,14 @@ public class EnemyShipScript : MonoBehaviour {
         currentHp -= damage;
         if(IsDead) {
             DestroyShip();
+            return;
         }
+
+        StartCoroutine(LaunchDamageFlashCoroutine());
+    }
+
+    private IEnumerator LaunchDamageFlashCoroutine() {
+        
     }
 
     private void DestroyShip() {

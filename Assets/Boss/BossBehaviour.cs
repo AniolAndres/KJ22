@@ -56,7 +56,6 @@ public class BossBehaviour : MonoBehaviour
     }
 
     private void Shoot() {
-
         foreach (var weaponTransform in bossWeapon) {
             var bigBullet = bulletPool.GetBigBullet();
             bigBullet.SetUp(weaponTransform.position, new BulletData {
@@ -68,7 +67,7 @@ public class BossBehaviour : MonoBehaviour
         }
     }
 
-    internal void OnRemove() {
+    public void OnRemove() {
         
     }
 }

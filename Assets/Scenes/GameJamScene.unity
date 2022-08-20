@@ -1246,7 +1246,7 @@ MonoBehaviour:
   playerParent: {fileID: 1027105183}
   bossParent: {fileID: 1254810063}
   playerPrefab: {fileID: 5564854183931316173, guid: 272da35896b93174498fbf60bb66bb1d, type: 3}
-  gameView: {fileID: 1592441745}
+  gameUiView: {fileID: 1592441745}
   levelScrollSpeed: 500
   bulletPool: {fileID: 1695973447}
   enemyActivationTrigger: {fileID: 796945389}
@@ -1997,7 +1997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 387c64a25f1bb9d49981fc70b84801aa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

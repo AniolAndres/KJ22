@@ -62,7 +62,7 @@ public class BulletView : MonoBehaviour
         
     }
 
-    internal void ClearBullet() {
+    public void ClearBullet() {
         OnDestroyed?.Invoke(this);
     }
 }

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class KillZoneScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private void OnTriggerEnter2D(Collider2D collision) {
+        var enemyScript = collision.gameObject.GetComponent<EnemyShipScript>();
+        if (enemyScript != null) {
+            Destroy(enemyScript.gameObject);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
     }
 }

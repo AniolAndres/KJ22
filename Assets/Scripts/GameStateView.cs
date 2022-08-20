@@ -66,8 +66,10 @@ public class GameStateView : MonoBehaviour
 
     public void Clear() {
         //Clear everything upon going back to main
-        boss.OnRemove();
-        Destroy(boss.gameObject);
+        if (boss != null) {
+            boss.OnRemove();
+            Destroy(boss.gameObject);
+        }
 
         gameUiView.Clear();
 

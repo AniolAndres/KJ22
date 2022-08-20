@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -15,7 +17,13 @@ public class PlayerScript : MonoBehaviour
     private Transform swarmParent;
 
     [SerializeField]
+    private float invulerabilityTime;
+
+    [SerializeField]
     private int totalHp;
+
+    [SerializeField]
+    private PlayableDirector playableDirector;
 
     private RectTransform rectTransform => transform as RectTransform;
 
@@ -30,6 +38,8 @@ public class PlayerScript : MonoBehaviour
 
     public event Action OnPlayerDeath;
 
+    private bool isInvulerable;
+
     public void SpawnShip(ShipData shipData, BulletPool bulletPool) {
         var shipView = Instantiate(shipData.alliedShipPrefab, swarmParent);
         var curve = curveFactory.GetRandomCurve();
@@ -38,10 +48,31 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void TakeDamage(int damage) {
+        if (isInvulerable) {
+            return;
+        }
+
         currentHp -= damage;
         if(currentHp <= 0) {
             OnPlayerDeath?.Invoke();
+            return;
         }
+
+        StartCoroutine(LaunchInvulerability());
+    }
+
+    public IEnumerator LaunchInvulerability() {
+        isInvulerable = true;
+        playableDirector.time = 0;
+        playableDirector.Evaluate();
+        playableDirector.Play();
+
+        yield return new WaitForSeconds(invulerabilityTime);
+
+        playableDirector.Stop();
+        playableDirector.time = 0;
+        playableDirector.Evaluate();
+        isInvulerable = false;
     }
     
     public void Heal(int heal) {
