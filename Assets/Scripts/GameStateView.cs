@@ -94,6 +94,7 @@ public class GameStateView : MonoBehaviour
         playerShip.Init();
 
         gameUiView.Setup();
+        gameUiView.LinkPlayer(playerShip);
     }
 
     private void SpawnShipButton(ShipData shipData) {
@@ -125,6 +126,7 @@ public class GameStateView : MonoBehaviour
 
         playerShip.OnRemove();
         playerShip.OnPlayerDeath -= OnLevelFail;
+        gameUiView.UnlinkPlayer();
         Destroy(playerShip.gameObject);
 
         currentLevel.OnDestroy();
@@ -135,6 +137,7 @@ public class GameStateView : MonoBehaviour
         playerShip = Instantiate(playerPrefab, playerParent);
         playerShip.OnPlayerDeath += OnLevelFail;
         playerShip.Init();
+        gameUiView.LinkPlayer(playerShip);
 
         currentLevel.SetScrollSpeed(levelScrollSpeed);
     }

@@ -38,6 +38,10 @@ public class PlayerScript : MonoBehaviour
 
     public event Action OnPlayerDeath;
 
+    public event Action<int,int> OnDamageTaken;
+
+    public event Action<int,int> OnHealReceived;
+
     private bool isInvulerable;
 
     public void SpawnShip(ShipData shipData, BulletPool bulletPool) {
@@ -52,8 +56,18 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
+        var previous = currentHp;
+
         currentHp -= damage;
-        if(currentHp <= 0) {
+        if(currentHp < 0) {
+            currentHp = 0;
+        }
+
+        var effectiveDamage = previous - currentHp;
+
+        OnDamageTaken?.Invoke(currentHp, effectiveDamage);
+
+        if (currentHp == 0) {
             OnPlayerDeath?.Invoke();
             return;
         }
@@ -76,15 +90,36 @@ public class PlayerScript : MonoBehaviour
     }
     
     public void Heal(int heal) {
+        var previousHp = currentHp;
+
         currentHp += heal;
         if(currentHp > maxHp) {
             currentHp = maxHp;
+        }
+
+        var effectiveHeal = currentHp - previousHp;
+
+        if(effectiveHeal > 0) {
+            OnHealReceived?.Invoke(currentHp, effectiveHeal);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+
+        if (Input.GetKeyDown(KeyCode.T)) {
+            TakeDamage(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H)) {
+            Heal(1);
+        }
+
+#endif
+
+
         var velocity = Vector2.zero;
         if (GameInputLocker.GetKey(KeyCode.W) || GameInputLocker.GetKey(KeyCode.UpArrow)) {
             velocity += Vector2.up;

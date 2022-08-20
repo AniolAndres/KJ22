@@ -88,6 +88,7 @@ public class GameUiView : MonoBehaviour
     public void Clear() {
         currencyController.Clear();
         healthController.Clear();
+
     }
 
     private void FireThirdShipAction() {
@@ -106,4 +107,11 @@ public class GameUiView : MonoBehaviour
         OnShipButtonPressed?.Invoke(shipData);
     }
 
+    public void LinkPlayer(PlayerScript playerShip) {
+        healthController.LinkPlayer(playerShip);
+    }
+
+    public void UnlinkPlayer() {
+        healthController.Unlink();
+    }
 }
