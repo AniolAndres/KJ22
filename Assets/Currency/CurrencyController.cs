@@ -2,6 +2,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class CurrencyController : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class CurrencyController : MonoBehaviour
 
     [SerializeField]
     private EnemyActivationTrigger enemyActivationTrigger;
+
+    [SerializeField]
+    private PlayableDirector currencyAddedDirector;
+
+    [SerializeField]
+    private PlayableDirector notEnoughCurrencyDirector;
 
     private int totalCurrency;
 
@@ -28,10 +35,25 @@ public class CurrencyController : MonoBehaviour
     }
 
     public bool HasEnoughCurrency(int cost) {
-        return totalCurrency >= cost;
+
+        if(totalCurrency >= cost) {
+            return true;
+        }
+
+        notEnoughCurrencyDirector.Stop();
+        notEnoughCurrencyDirector.time = 0;
+        notEnoughCurrencyDirector.Evaluate();
+        notEnoughCurrencyDirector.Play();
+
+        return false;
     }
 
     public void AddCurrency(int sum) {
+        currencyAddedDirector.Stop();
+        currencyAddedDirector.time = 0;
+        currencyAddedDirector.Evaluate();
+        currencyAddedDirector.Play();
+
         totalCurrency += sum;
         UpdateCurrencyText();
     }
