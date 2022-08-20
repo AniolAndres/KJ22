@@ -51,7 +51,7 @@ public class EnemyShipScript : MonoBehaviour {
     }
 
     private IEnumerator LaunchDamageFlashCoroutine() {
-        
+        yield return null;
     }
 
     private void DestroyShip() {
