@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private Transform swarmParent;
 
+    [SerializeField]
+    private int totalHp;
+
     private RectTransform rectTransform => transform as RectTransform;
 
     private readonly CurveFactory curveFactory = new CurveFactory();
@@ -21,16 +25,30 @@ public class PlayerScript : MonoBehaviour
 
     private Vector2 parentSize;
 
-    private void Start() {
-        var parentRectTransform = transform.parent.transform as RectTransform;
-        parentSize = parentRectTransform.rect.size;
-    }
+    private int maxHp;
+    private int currentHp;
+
+    public event Action OnPlayerDeath;
 
     public void SpawnShip(ShipData shipData, BulletPool bulletPool) {
         var shipView = Instantiate(shipData.alliedShipPrefab, swarmParent);
         var curve = curveFactory.GetRandomCurve();
         shipView.Setup(shipData, curve, this, bulletPool);
         alliedShips.Add(shipView);
+    }
+
+    public void TakeDamage(int damage) {
+        currentHp -= damage;
+        if(currentHp <= 0) {
+            OnPlayerDeath?.Invoke();
+        }
+    }
+    
+    public void Heal(int heal) {
+        currentHp += heal;
+        if(currentHp > maxHp) {
+            currentHp = maxHp;
+        }
     }
 
     // Update is called once per frame
@@ -68,5 +86,16 @@ public class PlayerScript : MonoBehaviour
         }
 
         rectTransform.anchoredPosition = newPosition;
+    }
+
+    public void OnRemove() {
+        
+    }
+
+    public void Init() {
+        var parentRectTransform = transform.parent.transform as RectTransform;
+        parentSize = parentRectTransform.rect.size;
+        maxHp = totalHp;
+        currentHp = totalHp;
     }
 }

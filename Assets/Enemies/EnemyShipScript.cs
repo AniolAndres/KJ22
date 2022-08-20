@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShipScript : MonoBehaviour, IEnemy {
+public class EnemyShipScript : MonoBehaviour {
 
     [SerializeField]
-    private float hp;
+    private int hp;
 
     [SerializeField]
     private float timeBetweenShots;
 
     [SerializeField]
-    private float bulletDamage;
+    private int bulletDamage;
 
     [SerializeField]
     private float bulletSpeed;
@@ -24,9 +24,9 @@ public class EnemyShipScript : MonoBehaviour, IEnemy {
 
     private float timer = 0.0f;
 
-    private float currentHp;
+    private int currentHp;
 
-    public bool IsDead => currentHp <= 0f;
+    public bool IsDead => currentHp <= 0;
 
     public event Action<int> OnEnemyShipDestroyed;
 
@@ -35,7 +35,7 @@ public class EnemyShipScript : MonoBehaviour, IEnemy {
         currentHp = hp;
     }
 
-    public void TakeDamage(float damage) {
+    public void TakeDamage(int damage) {
 
         if(bulletPool == null) {
             return;

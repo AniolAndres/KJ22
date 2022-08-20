@@ -30,19 +30,39 @@ public class BulletView : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
 
+        if (bulletData.isFriendly) {
+            var enemyScript = collision.gameObject.GetComponent<EnemyShipScript>();
+            if(enemyScript != null && !enemyScript.IsDead) {
+                enemyScript.TakeDamage(bulletData.damage);
+                SpawnHitParticles();
+                OnDestroyed?.Invoke(this);
+                return;
+            }
 
+            var bossScript = collision.gameObject.GetComponent<BossBehaviour>();
+            if(bossScript != null) {
+                bossScript.TakeDamage(bulletData.damage);
+                SpawnHitParticles();
+                OnDestroyed?.Invoke(this);
+                return;
+            }
 
-        var enemyScript = collision.gameObject.GetComponent<EnemyShipScript>();
-        if(enemyScript != null && !enemyScript.IsDead && bulletData.isFriendly && enemyScript is IEnemy enemy) {
-            enemy.TakeDamage(bulletData.damage);
-            SpawnHitParticles();
-            OnDestroyed?.Invoke(this);
+            return;
         }
 
-        
+        var playerScript = collision.gameObject.GetComponent<PlayerScript>();
+        if(playerScript != null) {
+            playerScript.TakeDamage(bulletData.damage);
+            OnDestroyed?.Invoke(this);
+            return;
+        }
     }
 
     private void SpawnHitParticles() {
         
+    }
+
+    internal void ClearBullet() {
+        OnDestroyed?.Invoke(this);
     }
 }

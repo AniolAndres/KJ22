@@ -2,11 +2,11 @@
 using UnityEngine;
 
 [Serializable]
-public class BulletData  {
+public struct BulletData  {
 
     public float bulletSpeed;
 
-    public float damage;
+    public int damage;
 
     public float bulletLifeTime;
 

@@ -16,6 +16,13 @@ public class MainComponent : MonoBehaviour
         StartMenu.gameObject.SetActive(true);
         StartMenu.OnGameStart += StartGame;
         GameState.gameObject.SetActive(false);
+        GameState.OnBackToMain += BackToMain;
+    }
+
+    private void BackToMain() {
+        GameState.Clear();
+        StartMenu.gameObject.SetActive(true);
+        GameState.gameObject.SetActive(false);
     }
 
     private void StartGame() {

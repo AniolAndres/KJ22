@@ -10,6 +10,8 @@ public class EnemyActivationTrigger : MonoBehaviour
 
     public event Action<int> OnCurrencyReceived;
 
+    public event Action OnBossTriggerHit;
+
     public BulletPool GetPool() {
         return bulletPool;
     }
@@ -19,7 +21,14 @@ public class EnemyActivationTrigger : MonoBehaviour
         if (enemy != null) {
             enemy.Setup(bulletPool);
             enemy.OnEnemyShipDestroyed += OnEnemyDestroyed;
+            return;
         }
+
+        var bossTrigger = collision.gameObject.GetComponent<BossTrigger>(); 
+        if(bossTrigger != null) {
+            OnBossTriggerHit?.Invoke();
+        }
+        
     }
 
     private void OnEnemyDestroyed(int reward) {

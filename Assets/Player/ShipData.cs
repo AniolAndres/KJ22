@@ -9,7 +9,7 @@ public class ShipData {
 
     public float speed;
 
-    public float damage;
+    public int damage;
 
     public float timeBetweenShots;
 

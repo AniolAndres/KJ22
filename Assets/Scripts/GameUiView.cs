@@ -24,6 +24,16 @@ public class GameUiView : MonoBehaviour
 
     public event Action<ShipData> OnShipButtonPressed;
 
+#if UNITY_EDITOR
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.M)) {
+            currencyController.AddCurrency(20);
+        }
+    }
+   
+
+#endif
     private void OnEnable() {
         FirstShipButton.onClick.AddListener(FireFirstShipAction);
         SecondShipButton.onClick.AddListener(FireSecondShipAction);
@@ -42,6 +52,13 @@ public class GameUiView : MonoBehaviour
         }
 
         var shipData = shipProvider.GetFirstShip();
+
+        if (!currencyController.HasEnoughCurrency(shipData.cost)) {
+            return;
+        }
+
+        currencyController.SpendCurrency(shipData.cost);
+
         OnShipButtonPressed?.Invoke(shipData);
     }
 
@@ -51,7 +68,19 @@ public class GameUiView : MonoBehaviour
         }
 
         var shipData = shipProvider.GetSecondShip();
+
+        if (!currencyController.HasEnoughCurrency(shipData.cost)) {
+            return;
+        }
+
+        currencyController.SpendCurrency(shipData.cost);
+
         OnShipButtonPressed?.Invoke(shipData);
+    }
+
+    public void Clear() {
+        currencyController.Clear();
+        healthController.Clear();
     }
 
     private void FireThirdShipAction() {
@@ -60,6 +89,13 @@ public class GameUiView : MonoBehaviour
         }
 
         var shipData = shipProvider.GetThirdShip();
+
+        if (!currencyController.HasEnoughCurrency(shipData.cost)) {
+            return;
+        }
+
+        currencyController.SpendCurrency(shipData.cost);
+
         OnShipButtonPressed?.Invoke(shipData);
     }
 

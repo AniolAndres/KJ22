@@ -1,8 +1,6 @@
 
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameStateView : MonoBehaviour
 {
@@ -16,10 +14,13 @@ public class GameStateView : MonoBehaviour
     private Transform playerParent;
 
     [SerializeField]
+    private Transform bossParent;
+
+    [SerializeField]
     private PlayerScript playerPrefab;
 
     [SerializeField]
-    private GameUiView gameView;
+    private GameUiView gameUiView;
 
     [SerializeField]
     private float levelScrollSpeed;
@@ -27,28 +28,67 @@ public class GameStateView : MonoBehaviour
     [SerializeField]
     private BulletPool bulletPool;
 
+    [SerializeField]
+    private EnemyActivationTrigger enemyActivationTrigger;
+
+    [SerializeField]
+    private BossBehaviour bossPrefab;
+
+    private BossBehaviour boss;
+
     private LevelController currentLevel;
 
     private int currentLevelIndex;
 
     private PlayerScript playerShip;
 
+    public event Action OnBackToMain;
+
     private void OnEnable() {
-        gameView.OnShipButtonPressed += SpawnShipButton;
+        gameUiView.OnShipButtonPressed += SpawnShipButton;
+        enemyActivationTrigger.OnBossTriggerHit += SpawnBoss;
     }
 
     private void OnDisable() {
-        gameView.OnShipButtonPressed -= SpawnShipButton;
+        gameUiView.OnShipButtonPressed -= SpawnShipButton;
+        enemyActivationTrigger.OnBossTriggerHit -= SpawnBoss;
+    }
+
+    private void SpawnBoss() {
+        boss = Instantiate(bossPrefab, bossParent);
+        boss.Init(bulletPool);
+        boss.OnBossKilled += OnBossKilled;
+    }
+
+    private void OnBossKilled() {
+        OnLevelComplete();
+    }
+
+    public void Clear() {
+        //Clear everything upon going back to main
+        boss.OnRemove();
+        Destroy(boss.gameObject);
+
+        gameUiView.Clear();
+
+        playerShip.OnRemove();
+        playerShip.OnPlayerDeath -= OnLevelFail;
+        Destroy(playerShip.gameObject);
+
+        currentLevel.OnDestroy();
+        Destroy(currentLevel.gameObject);
+
+        bulletPool.OnClear();
     }
 
     public void StartFirstLevel() {
         var first = levelProvider.GetLevel(currentLevelIndex);
         currentLevel = Instantiate(first, levelParent);
-        currentLevel.OnLevelFailed += OnLevelFail;
-        currentLevel.OnLevelComplete += OnLevelComplete;
         currentLevel.OnStart();
         currentLevel.SetScrollSpeed(levelScrollSpeed);
         playerShip = Instantiate(playerPrefab, playerParent);
+        playerShip.OnPlayerDeath += OnLevelFail;
+        playerShip.Init();
     }
 
     private void SpawnShipButton(ShipData shipData) {
@@ -67,28 +107,30 @@ public class GameStateView : MonoBehaviour
             return;
         }
     }
+
 #endif
 
     public void SetNextLevel() {
 
-        currentLevel.OnLevelFailed -= OnLevelFail;
-        currentLevel.OnLevelComplete -= OnLevelComplete;
+        playerShip.OnRemove();
+        playerShip.OnPlayerDeath -= OnLevelFail;
+        Destroy(playerShip.gameObject);
 
         currentLevel.OnDestroy();
         Destroy(currentLevel.gameObject);
         var next = levelProvider.GetLevel(++currentLevelIndex);
         currentLevel = Instantiate(next, levelParent);
         currentLevel.OnStart();
+        playerShip = Instantiate(playerPrefab, playerParent);
+        playerShip.OnPlayerDeath += OnLevelFail;
+        playerShip.Init();
 
         currentLevel.SetScrollSpeed(levelScrollSpeed);
-
-        currentLevel.OnLevelFailed += OnLevelFail;
-        currentLevel.OnLevelComplete += OnLevelComplete;
     }
 
     private void OnLevelFail() {
         //Repeat? Back to main?
-
+        OnBackToMain?.Invoke();
     }
 
     private void OnLevelComplete() {

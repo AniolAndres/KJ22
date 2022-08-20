@@ -47,4 +47,9 @@ public class CurrencyController : MonoBehaviour
     private void UpdateCurrencyText() {
         currencyText.text = totalCurrency.ToString();
     }
+
+    public void Clear() {
+        totalCurrency = 0;
+        UpdateCurrencyText();
+    }
 }
