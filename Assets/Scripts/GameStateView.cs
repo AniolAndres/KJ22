@@ -114,6 +114,12 @@ public class GameStateView : MonoBehaviour
 
     public void SetNextLevel() {
 
+        //Clear everything upon going back to main
+        if (boss != null) {
+            boss.OnRemove();
+            Destroy(boss.gameObject);
+        }
+
         playerShip.OnRemove();
         playerShip.OnPlayerDeath -= OnLevelFail;
         Destroy(playerShip.gameObject);

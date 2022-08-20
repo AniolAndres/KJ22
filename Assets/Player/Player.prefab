@@ -171,7 +171,7 @@ MonoBehaviour:
   speed: 650
   edgeMargin: 50
   swarmParent: {fileID: 38530461724047270}
-  invulerabilityTime: 0
+  invulerabilityTime: 5
   totalHp: 5
   playableDirector: {fileID: 7937507753079803497}
 --- !u!50 &2703860291461890970
