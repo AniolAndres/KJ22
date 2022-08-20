@@ -28,6 +28,9 @@ public class EnemyShipScript : MonoBehaviour {
     [SerializeField]
     private BulletType bulletType;
 
+    [SerializeField]
+    private ExplosionView explosionPrefab;
+
     private BulletPool bulletPool;
 
     private float timer = 0.0f;
@@ -85,6 +88,7 @@ public class EnemyShipScript : MonoBehaviour {
     }
 
     private void DestroyShip() {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity, this.transform.parent);
         gameObject.SetActive(false);
         OnEnemyShipDestroyed?.Invoke(5);
     }

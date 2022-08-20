@@ -10,6 +10,7 @@ public class MainComponent : MonoBehaviour
     [SerializeField]
     private GameStateView GameState;
 
+
     // Start is called before the first frame update
     void Start()
     {

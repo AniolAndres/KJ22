@@ -129,12 +129,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 2
-  timeBetweenShots: 0.5
+  timeBetweenShots: 5
   bulletDamage: 1
   bulletSpeed: 700
   bulletLifeTime: 5
   shipImage: {fileID: 5182332745456146237}
   bulletType: 4
+  explosionPrefab: {fileID: 1640598087630050295, guid: 980f27d334f1c1d4faa47b9fda8427c8, type: 3}
 --- !u!61 &5531709291028849358
 BoxCollider2D:
   m_ObjectHideFlags: 0

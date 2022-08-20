@@ -2089,11 +2089,11 @@ RectTransform:
   m_Father: {fileID: 122362270}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 582, y: -70}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -267, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1305485883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,7 +2131,7 @@ MonoBehaviour:
   bossParent: {fileID: 1254810063}
   playerPrefab: {fileID: 5564854183931316173, guid: 272da35896b93174498fbf60bb66bb1d, type: 3}
   gameUiView: {fileID: 1592441745}
-  levelScrollSpeed: 500
+  levelScrollSpeed: 200
   bulletPool: {fileID: 1695973447}
   enemyActivationTrigger: {fileID: 796945389}
   bossPrefab: {fileID: 5210028576595452570, guid: a214f405d9df29e4a94b09835c4fab23, type: 3}

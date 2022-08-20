@@ -24,6 +24,7 @@ public class AlliedShipScript : MonoBehaviour {
         this.bulletPool = bulletPool;
         this.shipData = shipData;
         timer = Random.Range(0f, shipData.timeBetweenShots);
+        interpolator = Random.Range(0f, 6.28f);
     }
 
     private void Update() {

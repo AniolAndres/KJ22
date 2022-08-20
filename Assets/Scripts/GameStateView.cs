@@ -124,6 +124,8 @@ public class GameStateView : MonoBehaviour
             Destroy(boss.gameObject);
         }
 
+        bulletPool.OnClear();
+
         playerShip.OnRemove();
         playerShip.OnPlayerDeath -= OnLevelFail;
         gameUiView.UnlinkPlayer();
