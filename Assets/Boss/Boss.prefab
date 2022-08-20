@@ -359,8 +359,8 @@ MonoBehaviour:
   bossImage: {fileID: 6613849645063055708}
   bulletType: 4
   explosionPrefab: {fileID: 1640598087630050295, guid: 980f27d334f1c1d4faa47b9fda8427c8, type: 3}
-  explosionsInterval: 0.1
-  numberOfExplosions: 50
+  explosionsInterval: 0.2
+  numberOfExplosions: 25
 --- !u!1 &5114085353992981020
 GameObject:
   m_ObjectHideFlags: 0
