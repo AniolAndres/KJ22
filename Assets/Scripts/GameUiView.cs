@@ -5,13 +5,13 @@ using UnityEngine.UI;
 public class GameUiView : MonoBehaviour
 {
     [SerializeField]
-    private Button FirstShipButton;
+    private AddShipButtonView FirstShipButton;
 
     [SerializeField]
-    private Button SecondShipButton;
+    private AddShipButtonView SecondShipButton;
 
     [SerializeField]
-    private Button ThirdShipButton;
+    private AddShipButtonView ThirdShipButton;
 
     [SerializeField]
     private AlliedShipProvider shipProvider;
@@ -31,19 +31,26 @@ public class GameUiView : MonoBehaviour
             currencyController.AddCurrency(20);
         }
     }
-   
+
 
 #endif
+
     private void OnEnable() {
-        FirstShipButton.onClick.AddListener(FireFirstShipAction);
-        SecondShipButton.onClick.AddListener(FireSecondShipAction);
-        ThirdShipButton.onClick.AddListener(FireThirdShipAction);
+        FirstShipButton.OnButtonClicked += FireFirstShipAction;
+        SecondShipButton.OnButtonClicked += FireSecondShipAction;
+        ThirdShipButton.OnButtonClicked += FireThirdShipAction;
     }
 
     private void OnDisable() {
-        FirstShipButton.onClick.RemoveListener(FireFirstShipAction);
-        SecondShipButton.onClick.RemoveListener(FireSecondShipAction);
-        ThirdShipButton.onClick.RemoveListener(FireThirdShipAction);
+        FirstShipButton.OnButtonClicked -= FireFirstShipAction;
+        SecondShipButton.OnButtonClicked -= FireSecondShipAction;
+        ThirdShipButton.OnButtonClicked -= FireThirdShipAction;
+    }
+
+    public void Setup() {
+        FirstShipButton.Setup(shipProvider.GetFirstShip());
+        SecondShipButton.Setup(shipProvider.GetSecondShip());
+        ThirdShipButton.Setup(shipProvider.GetThirdShip());
     }
 
     private void FireFirstShipAction() {

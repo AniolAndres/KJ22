@@ -84,6 +84,7 @@ public class GameStateView : MonoBehaviour
     }
 
     public void StartFirstLevel() {
+
         var first = levelProvider.GetLevel(currentLevelIndex);
         currentLevel = Instantiate(first, levelParent);
         currentLevel.OnStart();
@@ -91,6 +92,8 @@ public class GameStateView : MonoBehaviour
         playerShip = Instantiate(playerPrefab, playerParent);
         playerShip.OnPlayerDeath += OnLevelFail;
         playerShip.Init();
+
+        gameUiView.Setup();
     }
 
     private void SpawnShipButton(ShipData shipData) {
