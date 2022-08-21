@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  amount: 5
+  amount: 1
 --- !u!50 &8242602295268573619
 Rigidbody2D:
   serializedVersion: 4
