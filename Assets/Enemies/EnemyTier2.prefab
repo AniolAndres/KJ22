@@ -265,7 +265,7 @@ MonoBehaviour:
   hp: 2
   timeBetweenShots: 2
   bulletDamage: 2
-  bulletSpeed: 700
+  bulletSpeed: 800
   bulletLifeTime: 5
   shipImage: {fileID: 5182332745456146237}
   bulletType: 4

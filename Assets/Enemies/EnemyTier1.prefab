@@ -265,8 +265,8 @@ MonoBehaviour:
   hp: 1
   timeBetweenShots: 3
   bulletDamage: 1
-  bulletSpeed: 1200
-  bulletLifeTime: 3
+  bulletSpeed: 800
+  bulletLifeTime: 2
   shipImage: {fileID: 5182332745456146237}
   bulletType: 4
   explosionPrefab: {fileID: 1640598087630050295, guid: 980f27d334f1c1d4faa47b9fda8427c8, type: 3}
