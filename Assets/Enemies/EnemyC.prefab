@@ -277,6 +277,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 531389c901ff06f48b2eb41d890a0b55, type: 3}
   - {fileID: 8300000, guid: 18e15cc37f61684459294356f18e8ddc, type: 3}
   explosionAudioSource: {fileID: 7743181218375631817}
+  energyPickupPrefab: {fileID: 2723175639549526711, guid: 59772aa602c54254cbcd2ee3862362a5, type: 3}
 --- !u!61 &5531709291028849358
 BoxCollider2D:
   m_ObjectHideFlags: 0
