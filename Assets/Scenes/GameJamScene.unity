@@ -2113,7 +2113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1305485885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3809,6 +3809,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2062938191}
     m_Modifications:
+    - target: {fileID: 4845167673277722313, guid: 04025e31541185043afb6573c5ccfbc0, type: 3}
+      propertyPath: m_text
+      value: SPACE SWARM
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845167673277722313, guid: 04025e31541185043afb6573c5ccfbc0, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248254416850221277, guid: 04025e31541185043afb6573c5ccfbc0, type: 3}
+      propertyPath: m_text
+      value: SPACE SWARM
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248254416850221277, guid: 04025e31541185043afb6573c5ccfbc0, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7829260537599733656, guid: 04025e31541185043afb6573c5ccfbc0, type: 3}
       propertyPath: m_RootOrder
       value: 0
