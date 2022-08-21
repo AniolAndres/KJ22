@@ -74,6 +74,8 @@ public class GameStateView : MonoBehaviour
             Destroy(boss.gameObject);
         }
 
+        levelAudioSource.Stop();
+
         gameUiView.Clear();
 
         playerShip.OnRemove();
@@ -139,6 +141,11 @@ public class GameStateView : MonoBehaviour
         currentLevel.OnDestroy();
         Destroy(currentLevel.gameObject);
         var next = levelProvider.GetLevel(++currentLevelIndex);
+        if(currentLevel == null) {
+
+            OnBackToMain?.Invoke();
+        }
+
         currentLevel = Instantiate(next, levelParent);
         currentLevel.OnStart();
         playerShip = Instantiate(playerPrefab, playerParent);

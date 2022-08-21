@@ -109,9 +109,11 @@ public class GameUiView : MonoBehaviour
 
     public void LinkPlayer(PlayerScript playerShip) {
         healthController.LinkPlayer(playerShip);
+        currencyController.LinkPlayer(playerShip);
     }
 
     public void UnlinkPlayer() {
         healthController.Unlink();
+        currencyController.Unlink();
     }
 }

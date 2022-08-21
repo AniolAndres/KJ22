@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -42,6 +43,12 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField]
     private int numberOfExplosions;
 
+    [SerializeField]
+    private AudioSource bossExplosionAudioSource;
+
+    [SerializeField]
+    private PlayableDirector disappearTimeline;
+
     public event Action OnBossKilled;
 
     private float timer = -2f;
@@ -62,6 +69,10 @@ public class BossBehaviour : MonoBehaviour
     }
 
     public void TakeDamage(int damage) {
+        if (isDead) {
+            return;
+        }
+
         currentHp -= damage;
         if(currentHp <= 0) {
             StartCoroutine(SpawnExplosions());
@@ -76,6 +87,8 @@ public class BossBehaviour : MonoBehaviour
     }
 
     private IEnumerator SpawnExplosions() {
+        var explosionCounter = 2;
+
         for(int i = 0; i < numberOfExplosions; ++i) {
 
             var randomX = Random.Range(-175f, 75f);
@@ -86,8 +99,19 @@ public class BossBehaviour : MonoBehaviour
             var explosion = Instantiate(explosionPrefab, this.transform.parent);
             explosion.transform.localPosition = position;
 
+            if(explosionCounter++ > 2) {
+                bossExplosionAudioSource.Play();
+                explosionCounter = 0;
+            }
+
             yield return new WaitForSeconds(explosionsInterval);
         }
+
+        disappearTimeline.Play();
+
+        bossImage.color = new Color(bossImage.color.r, bossImage.color.g, bossImage.color.b, 0f);
+
+        yield return new WaitForSeconds(5f);
 
         OnBossKilled?.Invoke();
     }

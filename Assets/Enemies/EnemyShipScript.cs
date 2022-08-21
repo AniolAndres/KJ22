@@ -31,6 +31,15 @@ public class EnemyShipScript : MonoBehaviour {
     [SerializeField]
     private ExplosionView explosionPrefab;
 
+    [SerializeField]
+    private AudioClip[] explosionClips;
+
+    [SerializeField]
+    private AudioSource explosionAudioSource;
+
+    [SerializeField]
+    private PickupView energyPickupPrefab;
+
     private BulletPool bulletPool;
 
     private float timer = 0.0f;
@@ -38,8 +47,6 @@ public class EnemyShipScript : MonoBehaviour {
     private int currentHp;
 
     public bool IsDead => currentHp <= 0;
-
-    public event Action<int> OnEnemyShipDestroyed;
 
     private Coroutine damageCoroutine;
 
@@ -89,8 +96,11 @@ public class EnemyShipScript : MonoBehaviour {
 
     private void DestroyShip() {
         Instantiate(explosionPrefab, transform.position, Quaternion.identity, this.transform.parent);
-        gameObject.SetActive(false);
-        OnEnemyShipDestroyed?.Invoke(5);
+        Instantiate(energyPickupPrefab, transform.position, Quaternion.identity, this.transform.parent);
+        var randomExplosion = explosionClips[Random.Range(0, explosionClips.Length - 1)];
+        explosionAudioSource.clip = randomExplosion;
+        explosionAudioSource.Play();
+        shipImage.gameObject.SetActive(false);
     }
 
     private void Update() {

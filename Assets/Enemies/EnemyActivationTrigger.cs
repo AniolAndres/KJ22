@@ -8,8 +8,6 @@ public class EnemyActivationTrigger : MonoBehaviour
     [SerializeField]
     private BulletPool bulletPool;
 
-    public event Action<int> OnCurrencyReceived;
-
     public event Action OnBossTriggerHit;
 
     public BulletPool GetPool() {
@@ -20,7 +18,6 @@ public class EnemyActivationTrigger : MonoBehaviour
         var enemy = collision.gameObject.GetComponent<EnemyShipScript>();
         if (enemy != null) {
             enemy.Setup(bulletPool);
-            enemy.OnEnemyShipDestroyed += OnEnemyDestroyed;
             return;
         }
 
@@ -31,7 +28,4 @@ public class EnemyActivationTrigger : MonoBehaviour
         
     }
 
-    private void OnEnemyDestroyed(int reward) {
-        OnCurrencyReceived?.Invoke(reward);
-    }
 }

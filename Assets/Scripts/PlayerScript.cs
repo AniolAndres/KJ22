@@ -25,6 +25,18 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private PlayableDirector playableDirector;
 
+    [SerializeField]
+    private AudioSource pickupAudioSource;
+
+    [SerializeField]
+    private AudioSource damageSelfAudioSource;
+
+    [SerializeField]
+    private AudioClip healthPickupAudio;
+
+    [SerializeField]
+    private AudioClip energyPickupAudio;
+
     private RectTransform rectTransform => transform as RectTransform;
 
     private readonly CurveFactory curveFactory = new CurveFactory();
@@ -42,6 +54,8 @@ public class PlayerScript : MonoBehaviour
 
     public event Action<int,int> OnHealReceived;
 
+    public event Action<int> OnEnergyReceived;
+
     private bool isInvulerable;
 
     public void SpawnShip(ShipData shipData, BulletPool bulletPool) {
@@ -49,6 +63,12 @@ public class PlayerScript : MonoBehaviour
         var curve = curveFactory.GetRandomCurve();
         shipView.Setup(shipData, curve, this, bulletPool);
         alliedShips.Add(shipView);
+    }
+
+    public void GiveEnergy(int amount) {
+        pickupAudioSource.clip = energyPickupAudio;
+        pickupAudioSource.Play();
+        OnEnergyReceived?.Invoke(amount);
     }
 
     public void TakeDamage(int damage) {
@@ -66,6 +86,8 @@ public class PlayerScript : MonoBehaviour
         var effectiveDamage = previous - currentHp;
 
         OnDamageTaken?.Invoke(currentHp, effectiveDamage);
+
+        damageSelfAudioSource.Play();
 
         if (currentHp == 0) {
             OnPlayerDeath?.Invoke();
@@ -90,6 +112,10 @@ public class PlayerScript : MonoBehaviour
     }
     
     public void Heal(int heal) {
+
+        pickupAudioSource.clip = healthPickupAudio;
+        pickupAudioSource.Play();
+
         var previousHp = currentHp;
 
         currentHp += heal;

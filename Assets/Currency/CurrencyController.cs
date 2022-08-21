@@ -18,15 +18,10 @@ public class CurrencyController : MonoBehaviour
     [SerializeField]
     private PlayableDirector notEnoughCurrencyDirector;
 
+    private PlayerScript playerScript;
+
     private int totalCurrency;
 
-    private void OnEnable() {
-        enemyActivationTrigger.OnCurrencyReceived += AddCurrency;
-    }
-
-    private void OnDisable() {
-        enemyActivationTrigger.OnCurrencyReceived -= AddCurrency;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -73,5 +68,15 @@ public class CurrencyController : MonoBehaviour
     public void Clear() {
         totalCurrency = 0;
         UpdateCurrencyText();
+    }
+
+    public void LinkPlayer(PlayerScript playerShip) {
+        this.playerScript = playerShip;
+        playerScript.OnEnergyReceived += AddCurrency;
+    }
+
+
+    public void Unlink() {
+        playerScript.OnEnergyReceived -= AddCurrency;
     }
 }

@@ -4,6 +4,9 @@ using Random = UnityEngine.Random;
 
 public class AlliedShipScript : MonoBehaviour {
 
+    [SerializeField]
+    private AudioSource audioSource;
+
     private RectTransform rectTransform => transform as RectTransform;
 
     private float interpolator;
@@ -40,6 +43,7 @@ public class AlliedShipScript : MonoBehaviour {
         if(timer > shipData.timeBetweenShots) {
             timer -= shipData.timeBetweenShots;
             var smallBullet = bulletPool.GetBulletView(shipData.bulletType);
+            audioSource.Play();
             smallBullet.SetUp(transform.position, new BulletData {
                 bulletLifeTime = shipData.bulletLifeTime,
                 bulletSpeed = shipData.bulletSpeed,
