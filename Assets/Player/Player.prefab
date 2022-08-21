@@ -313,6 +313,9 @@ MonoBehaviour:
   damageSelfAudioSource: {fileID: 2467236095071120924}
   healthPickupAudio: {fileID: 8300000, guid: 717bd812f46c8694f9b70e3e64867e69, type: 3}
   energyPickupAudio: {fileID: 8300000, guid: 44880ecbed2113c4e8f00a5b14f0c2c9, type: 3}
+  explosionPrefab: {fileID: 1640598087630050295, guid: 980f27d334f1c1d4faa47b9fda8427c8, type: 3}
+  amountOfExplosions: 25
+  timeBetweenExplosions: 0.1
 --- !u!50 &2703860291461890970
 Rigidbody2D:
   serializedVersion: 4

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using Random = UnityEngine.Random;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -37,6 +38,15 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private AudioClip energyPickupAudio;
 
+    [SerializeField]
+    private ExplosionView explosionPrefab;
+
+    [SerializeField]
+    private int amountOfExplosions;
+
+    [SerializeField]
+    private float timeBetweenExplosions;
+
     private RectTransform rectTransform => transform as RectTransform;
 
     private readonly CurveFactory curveFactory = new CurveFactory();
@@ -58,6 +68,8 @@ public class PlayerScript : MonoBehaviour
 
     private bool isInvulerable;
 
+    private bool isDead => currentHp <= 0;
+
     public void SpawnShip(ShipData shipData, BulletPool bulletPool) {
         var shipView = Instantiate(shipData.alliedShipPrefab, swarmParent);
         var curve = curveFactory.GetRandomCurve();
@@ -72,7 +84,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void TakeDamage(int damage) {
-        if (isInvulerable) {
+        if (isInvulerable || isDead) {
             return;
         }
 
@@ -90,11 +102,32 @@ public class PlayerScript : MonoBehaviour
         damageSelfAudioSource.Play();
 
         if (currentHp == 0) {
-            OnPlayerDeath?.Invoke();
+            DestroyPlayer();
+            StartCoroutine(DestroyPlayer());
             return;
         }
 
         StartCoroutine(LaunchInvulerability());
+    }
+
+    private IEnumerator DestroyPlayer() {
+
+        for(int i = 0; i < amountOfExplosions; i++) {
+
+            var randomX = Random.Range(-200f, 100f);
+            var randomY = Random.Range(-200f, 100f);
+
+            var position = new Vector2(randomX, randomY);
+
+            var explosion = Instantiate(explosionPrefab, this.transform.parent);
+            explosion.transform.localPosition = position;
+
+            yield return new WaitForSeconds(timeBetweenExplosions);
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        OnPlayerDeath?.Invoke();
     }
 
     public IEnumerator LaunchInvulerability() {
@@ -133,6 +166,10 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) {
+            return;
+        }
+
 #if UNITY_EDITOR
 
         if (Input.GetKeyDown(KeyCode.T)) {
