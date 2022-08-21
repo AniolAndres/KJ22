@@ -47,6 +47,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float timeBetweenExplosions;
 
+    [SerializeField]
+    private PlayableDirector disappearDirector;
+
     private RectTransform rectTransform => transform as RectTransform;
 
     private readonly CurveFactory curveFactory = new CurveFactory();
@@ -112,20 +115,27 @@ public class PlayerScript : MonoBehaviour
 
     private IEnumerator DestroyPlayer() {
 
+        bool played = false;
+
         for(int i = 0; i < amountOfExplosions; i++) {
 
-            var randomX = Random.Range(-200f, 100f);
-            var randomY = Random.Range(-200f, 100f);
+            var randomX = Random.Range(-150f, 100f);
+            var randomY = Random.Range(-150f, 100f);
 
             var position = new Vector2(randomX, randomY);
 
-            var explosion = Instantiate(explosionPrefab, this.transform.parent);
+            if(i > amountOfExplosions/2 && !played) {
+                played = true;
+                disappearDirector.Play();
+            }
+
+            var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity, this.transform);
             explosion.transform.localPosition = position;
 
             yield return new WaitForSeconds(timeBetweenExplosions);
         }
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         OnPlayerDeath?.Invoke();
     }
@@ -173,7 +183,7 @@ public class PlayerScript : MonoBehaviour
 #if UNITY_EDITOR
 
         if (Input.GetKeyDown(KeyCode.T)) {
-            TakeDamage(1);
+            TakeDamage(5);
         }
 
         if (Input.GetKeyDown(KeyCode.H)) {
