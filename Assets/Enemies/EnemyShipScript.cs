@@ -130,4 +130,14 @@ public class EnemyShipScript : MonoBehaviour {
             damage = this.bulletDamage
         });
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        var playerScript = collision.gameObject.GetComponent<PlayerScript>();
+        if(playerScript == null) {
+            return;
+        }
+
+        playerScript.TakeDamage(1);
+        TakeDamage(hp);
+    }
 }

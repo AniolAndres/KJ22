@@ -15,6 +15,7 @@ public class MainComponent : MonoBehaviour
     void Start()
     {
         StartMenu.gameObject.SetActive(true);
+        StartMenu.PlayMusic();
         StartMenu.OnGameStart += StartGame;
         GameState.gameObject.SetActive(false);
         GameState.OnBackToMain += BackToMain;
@@ -23,10 +24,12 @@ public class MainComponent : MonoBehaviour
     private void BackToMain() {
         GameState.Clear();
         StartMenu.gameObject.SetActive(true);
+        StartMenu.PlayMusic();
         GameState.gameObject.SetActive(false);
     }
 
     private void StartGame() {
+        StartMenu.StopMusic();
         StartMenu.gameObject.SetActive(false);
         GameState.gameObject.SetActive(true);
         GameState.StartFirstLevel();
