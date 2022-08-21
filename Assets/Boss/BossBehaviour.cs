@@ -63,6 +63,8 @@ public class BossBehaviour : MonoBehaviour
 
     private bool isDead => currentHp <= 0;
 
+    private float aliveTimer = 0f;
+
     public void Init(BulletPool bulletPool) {
         this.bulletPool = bulletPool;
         currentHp = hp;
@@ -145,6 +147,7 @@ public class BossBehaviour : MonoBehaviour
             return;
         }
 
+
         timer += Time.smoothDeltaTime;
         if(timer > timeBetweenShots) {
             timer -= timeBetweenShots;
@@ -159,10 +162,17 @@ public class BossBehaviour : MonoBehaviour
 
         bossHolder.localPosition = new Vector2(sine * 20f, secondSine * 20f);
 
+
+        aliveTimer += Time.smoothDeltaTime;
     }
 
     private void Shoot() {
         foreach (var weaponTransform in bossWeapon) {
+
+            var randomX = Random.Range(-100f, 25f);
+            var randomY = Random.Range(-300f, 300f);
+            weaponTransform.localPosition = new Vector2(randomX, randomY); ;
+
             var bigBullet = bulletPool.GetBulletView(bulletType);
             bigBullet.SetUp(weaponTransform.position, new BulletData {
                 bulletLifeTime = bulletLifeTime,
