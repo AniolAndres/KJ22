@@ -125,6 +125,13 @@ public class GameStateView : MonoBehaviour
 
     public void SetNextLevel() {
 
+        var next = levelProvider.GetLevel(++currentLevelIndex);
+        if (next == null) {
+
+            OnBackToMain?.Invoke();
+            return;
+        }
+
         //Clear everything upon going back to main
         if (boss != null) {
             boss.OnRemove();
@@ -140,11 +147,7 @@ public class GameStateView : MonoBehaviour
 
         currentLevel.OnDestroy();
         Destroy(currentLevel.gameObject);
-        var next = levelProvider.GetLevel(++currentLevelIndex);
-        if(currentLevel == null) {
 
-            OnBackToMain?.Invoke();
-        }
 
         currentLevel = Instantiate(next, levelParent);
         currentLevel.OnStart();

@@ -9,6 +9,10 @@ public class LevelProvider : ScriptableObject
     private List<LevelController> levels;
 
     public LevelController GetLevel(int index) {
+        if (index >= levels.Count) {
+            return null;
+        }
+
         return levels[index];
     }
 }
