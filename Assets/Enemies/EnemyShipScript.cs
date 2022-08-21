@@ -53,7 +53,6 @@ public class EnemyShipScript : MonoBehaviour {
     public void Setup(BulletPool pool) {
         this.bulletPool = pool;
         currentHp = hp;
-        timer = Random.Range(0f, timeBetweenShots * 0.66f);
     }
 
     public void TakeDamage(int damage) {

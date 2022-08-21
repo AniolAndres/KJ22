@@ -22,6 +22,9 @@ public class AddShipButtonView : MonoBehaviour {
     [SerializeField]
     private PlayableDirector pulseDirector;
 
+    [SerializeField]
+    private AudioSource buttonAudio;
+
     public event Action OnButtonClicked;
 
     public void Setup(ShipData shipData) {
@@ -40,6 +43,8 @@ public class AddShipButtonView : MonoBehaviour {
         pulseDirector.time = 0;
         pulseDirector.Evaluate();
         pulseDirector.Play();
+
+        buttonAudio.Play();
 
         OnButtonClicked?.Invoke();
     }
