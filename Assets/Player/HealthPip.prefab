@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   appearDirector: {fileID: 9119418863233100170}
   disappearDirector: {fileID: 6549388748395677133}
+  image: {fileID: 7470956344263680615}
 --- !u!95 &3301917640594181791
 Animator:
   serializedVersion: 4

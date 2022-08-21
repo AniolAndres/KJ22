@@ -6,7 +6,6 @@ public class HealthController : MonoBehaviour {
 
     [SerializeField]
     private HealthPipView[] healthPips;
-
   
     private PlayerScript player;
 
@@ -15,6 +14,10 @@ public class HealthController : MonoBehaviour {
 
     public void LinkPlayer(PlayerScript player) {
         this.player = player;
+        foreach(var pip in healthPips) {
+            pip.gameObject.SetActive(true);
+            pip.Reset();
+        }
         player.OnHealReceived += OnHeal;
         player.OnDamageTaken += OnDamage;
     }

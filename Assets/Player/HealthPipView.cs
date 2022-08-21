@@ -1,6 +1,8 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class HealthPipView : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class HealthPipView : MonoBehaviour
     [SerializeField]
     private PlayableDirector disappearDirector;
 
+    [SerializeField]
+    private Image image;
+
     public void PlayAppearDirector() {
         disappearDirector.Stop();
         appearDirector.Play();
@@ -18,5 +23,10 @@ public class HealthPipView : MonoBehaviour
     public void PlayDisappearDirector() {
         appearDirector.Stop();
         disappearDirector.Play();
+    }
+
+    public void Reset() {
+        transform.localScale = Vector3.one;
+        image.color = Color.black;
     }
 }
