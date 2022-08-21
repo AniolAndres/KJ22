@@ -24,6 +24,13 @@ public class EnemyActivationTrigger : MonoBehaviour
         var bossTrigger = collision.gameObject.GetComponent<BossTrigger>(); 
         if(bossTrigger != null) {
             OnBossTriggerHit?.Invoke();
+            return;
+        }
+
+        var bullet = collision.gameObject.GetComponent<BulletView>();
+        if(bullet != null) {
+            bullet.ClearBullet();
+            return;
         }
         
     }
