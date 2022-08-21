@@ -10,6 +10,9 @@ public class MainComponent : MonoBehaviour
     [SerializeField]
     private GameStateView GameState;
 
+    [SerializeField]
+    private AudioSource buttonSound;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,7 @@ public class MainComponent : MonoBehaviour
     }
 
     private void StartGame() {
+        buttonSound.Play();
         StartMenu.StopMusic();
         StartMenu.gameObject.SetActive(false);
         GameState.gameObject.SetActive(true);

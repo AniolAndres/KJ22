@@ -105,7 +105,6 @@ public class PlayerScript : MonoBehaviour
         damageSelfAudioSource.Play();
 
         if (currentHp == 0) {
-            DestroyPlayer();
             StartCoroutine(DestroyPlayer());
             return;
         }
