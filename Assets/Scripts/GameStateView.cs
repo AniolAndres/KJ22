@@ -34,6 +34,9 @@ public class GameStateView : MonoBehaviour
     [SerializeField]
     private BossBehaviour bossPrefab;
 
+    [SerializeField]
+    private AudioSource levelAudioSource;
+
     private BossBehaviour boss;
 
     private LevelController currentLevel;
@@ -93,6 +96,8 @@ public class GameStateView : MonoBehaviour
         playerShip.OnPlayerDeath += OnLevelFail;
         playerShip.Init();
 
+        levelAudioSource.Play();
+
         gameUiView.Setup();
         gameUiView.LinkPlayer(playerShip);
     }
@@ -141,11 +146,15 @@ public class GameStateView : MonoBehaviour
         playerShip.Init();
         gameUiView.LinkPlayer(playerShip);
 
+        levelAudioSource.Stop();
+        levelAudioSource.Play();
+
         currentLevel.SetScrollSpeed(levelScrollSpeed);
     }
 
     private void OnLevelFail() {
         //Repeat? Back to main?
+        levelAudioSource.Stop();
         OnBackToMain?.Invoke();
     }
 
