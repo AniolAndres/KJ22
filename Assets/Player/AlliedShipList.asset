@@ -17,7 +17,7 @@ MonoBehaviour:
     speed: 0.5
     damage: 1
     timeBetweenShots: 0.4
-    bulletLifeTime: 0.4
+    bulletLifeTime: 0.2
     bulletSpeed: 1200
     bulletType: 2
     alliedShipPrefab: {fileID: 5036377363204467891, guid: 6000f367cfa7ee04db6e9f5b09b65ccf, type: 3}

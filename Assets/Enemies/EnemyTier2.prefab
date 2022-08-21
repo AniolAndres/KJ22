@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d177c72926043e4f89cef5e5adb4ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 2
+  hp: 25
   timeBetweenShots: 2
   bulletDamage: 2
   bulletSpeed: 800
