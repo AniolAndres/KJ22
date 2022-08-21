@@ -23,7 +23,7 @@ MonoBehaviour:
     alliedShipPrefab: {fileID: 5036377363204467891, guid: 6000f367cfa7ee04db6e9f5b09b65ccf, type: 3}
   - cost: 5
     speed: 0.2
-    damage: 2
+    damage: 5
     timeBetweenShots: 2
     bulletLifeTime: 0.9
     bulletSpeed: 1200
@@ -31,7 +31,7 @@ MonoBehaviour:
     alliedShipPrefab: {fileID: 5036377363204467891, guid: 9dbf669a85cd1004a994156753a4f611, type: 3}
   - cost: 10
     speed: 0.3
-    damage: 4
+    damage: 12
     timeBetweenShots: 2
     bulletLifeTime: 2
     bulletSpeed: 1200
