@@ -131,6 +131,10 @@ public class EnemyShipScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        if (IsDead) {
+            return;
+        }
+
         var playerScript = collision.gameObject.GetComponent<PlayerScript>();
         if(playerScript == null) {
             return;
